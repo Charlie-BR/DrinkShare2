@@ -23,7 +23,6 @@
 	     fjs.parentNode.insertBefore(js, fjs);
 	   }(document, 'script', 'facebook-jssdk'));
 	</script>
-
 	<script>
 	  // This is called with the results from from FB.getLoginStatus().
 	  function statusChangeCallback(response) {
@@ -59,7 +58,7 @@
 
 	  window.fbAsyncInit = function() {
 	  FB.init({
-	    appId      : '190354277965892',
+	    appId      : '{your-app-id}',
 	    cookie     : true,  // enable cookies to allow the server to access 
 	                        // the session
 	    xfbml      : true,  // parse social plugins on this page
@@ -103,19 +102,8 @@
 	        'Thanks for logging in, ' + response.name + '!';
 	    });
 	  }
-	</script>
+  </script>
 
-	<!--
-	  Below we include the Login Button social plugin. This button uses
-	  the JavaScript SDK to present a graphical Login button that triggers
-	  the FB.login() function when clicked.
-	-->
-
-	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-	</fb:login-button>
-
-	<div id="status">
-	</div>
 
     <h1><%= title %></h1>
     <p>Welcome to <%= title %></p>
