@@ -22,6 +22,11 @@ app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
+// Mongoose connection
+//var mongoose = require('mongoose');
+//mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
+//mongoose.connect('mongodb://'+process.env.WDI_MONGOLAB_USER+':'+process.env.WDI_MONGOLAB_PW+'@ds041394.mongolab.com:41394/drink_share');
+
 app.use('/', routes);
 app.use('/users', users);
 
