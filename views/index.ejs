@@ -5,7 +5,30 @@
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
+
+  	<div id='container'>
+	  	<header>
+	  		Logo / Profile / Image?
+	  	</header>
+
+	  	<div id='search-bar'>
+	  		Search bar
+	  	</div>
+
+	  	<div id ='data-results'>
+	  		Table of data goes here
+	  	</div>
+
+	  	<div id='map'>
+	  		Map goes here
+	  	</div>
+  	</div>
+
+
+
+  <script src="https://code.jquery.com/jquery-2.1.4.js"></script>
+  <script>
+  	$('#data-results').html('<table>' + '<tr>' + '<td>' + '<p>data goes here</p>' + '</td>' + '</tr>' + '</table>');
+  </script>
   </body>
 </html>
