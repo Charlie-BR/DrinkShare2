@@ -5,7 +5,7 @@
     <meta charset="UTF-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
-  <body>
+  <body>		
   	<script>
 	  window.fbAsyncInit = function() {
 	  	console.log("FB is ",FB);
@@ -34,13 +34,13 @@
 	  console.log(response);
 	});
 
-	  (function(d, s, id){
-	     var js, fjs = d.getElementsByTagName(s)[0];
-	     if (d.getElementById(id)) {return;}
-	     js = d.createElement(s); js.id = id;
-	     js.src = "//connect.facebook.net/en_US/sdk.js";
-	     fjs.parentNode.insertBefore(js, fjs);
-	   }(document, 'script', 'facebook-jssdk'));
+		(function(d, s, id) {
+		  var js, fjs = d.getElementsByTagName(s)[0];
+		  if (d.getElementById(id)) return;
+		  js = d.createElement(s); js.id = id;
+		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=190354277965892";
+		  fjs.parentNode.insertBefore(js, fjs);
+		}(document, 'script', 'facebook-jssdk'));
 	</script>
 
 	<script>
@@ -143,13 +143,7 @@
 	  the FB.login() function when clicked.
 	-->
 
-	<fb:login-button scope="public_profile,email" onlogin="checkLoginState();">
-	</fb:login-button>
+	<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true"></div>
 
-	<div id="status">
-	</div>
-
-    <h1><%= title %></h1>
-    <p>Welcome to <%= title %></p>
   </body>
 </html>
