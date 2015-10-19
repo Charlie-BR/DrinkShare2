@@ -9,7 +9,7 @@ router.get('/users', function(req, res, next) {
 
 router.get('/', function(req, res, next) {
   //res.send('respond with a resource');
-  res.render('index', { title: 'Express' });
+  res.render('users', { title: 'Express' });
 });
 
 module.exports = router;
