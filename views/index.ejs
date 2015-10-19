@@ -8,12 +8,31 @@
   <body>
   	<script>
 	  window.fbAsyncInit = function() {
+	  	console.log("FB is ",FB);
 	    FB.init({
 	      appId      : '190354277965892',
 	      xfbml      : true,
 	      version    : 'v2.5'
 	    });
-	  };
+	 //    FB.ui(
+ 	// 	{
+  // 			method: 'share',
+  // 			href: 'https://developers.facebook.com/docs/'
+		// }, function(response){
+		// 	console.log("Sup response ",response);
+		// });
+	 //  };
+	  FB.ui(
+	  {
+		  method: 'share_open_graph',
+		  action_type: 'og.likes',
+		  action_properties: JSON.stringify({
+		    object:'https://developers.facebook.com/docs/',
+		  })
+	}, function(response){
+	  // Debug response (optional)
+	  console.log(response);
+	});
 
 	  (function(d, s, id){
 	     var js, fjs = d.getElementsByTagName(s)[0];
@@ -29,6 +48,7 @@
 	  function statusChangeCallback(response) {
 	    console.log('statusChangeCallback');
 	    console.log(response);
+	    // console.log("FB is ",FB);
 	    // The response object is returned with a status field that lets the
 	    // app know the current login status of the person.
 	    // Full docs on the response object can be found in the documentation
@@ -104,6 +124,18 @@
 	    });
 	  }
 	</script>
+	<!-- This is where pasted code just went -->
+	<script>
+// Only works after `FB.init` is called
+		function myFacebookLogin() 
+		{
+  			FB.login(function(){
+  // Note: The call will only work if you accept the permission request
+  				FB.api('/me/feed', 'post', {message: 'Hello, world!'});
+			}, {scope: 'publish_actions'});
+		}
+	</script>
+	<button onclick="myFacebookLogin()">Login with supppppp Facebook</button>
 
 	<!--
 	  Below we include the Login Button social plugin. This button uses
