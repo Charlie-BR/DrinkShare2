@@ -34,7 +34,7 @@ var barSchema = mongoose.Schema ({
   avg_wait_time: Number,
   users: Array,
   type_sold: Array
-});
+}, { collection: 'Bars' });
 
 //Model: creates the collection with document structure
 var Bar = mongoose.model('Bar', barSchema);
