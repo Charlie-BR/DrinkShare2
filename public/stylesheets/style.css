@@ -6,3 +6,30 @@ body {
 a {
   color: #00B7FF;
 }
+
+header {
+	background-color: gray;
+	color: white;
+	height: 50px;
+	text-align: right;
+}
+
+.container {
+	width: 80%;
+	margin: auto;
+}
+
+#search {
+	float: right;
+	margin: 10px;
+}
+
+#logo {
+	width: 10%;
+	float: right;
+}
+
+#data-results {
+	width: 80%;
+	margin: auto;
+}

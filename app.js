@@ -9,6 +9,7 @@ var routes = require('./routes/index');
 var users = require('./routes/users');
 
 var app = express();
+var mongoose = require('mongoose');
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -23,56 +24,36 @@ app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
 
 
+// var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
+//mongoose.connect('mongodb://'+process.env.WDI_MONGOLAB_USER+':'+process.env.WDI_MONGOLAB_PW+'@ds041394.mongolab.com:41394/drink_share');
 
+//Schema: creates document structure
 var barSchema = mongoose.Schema ({
   name: String,
   address: String,
-})
+  avg_wait_time: Number,
+  users: Array,
+  type_sold: Array
+}, { collection: 'Bars' });
 
-// Model: creates the collection with document structure
+//Model: creates the collection with document structure
 var Bar = mongoose.model('Bar', barSchema);
 
+Bar.find({}, function(err, documents) {
+  if(err) {
+    throw err;
+  } else {
+    console.log("bar is", documents);
+  }
+});
 
-// Document: creates a new document in the collection
-var newBar = new Bar ({name: "sup", address:"supppppppp"});
+//Document: creates a new document in the collection
+//var newBar = new Bar ({name: "Lucky's Lounge", address: "123 Main St., Austin, TX 78704"});
 
 //Save to database:
-newBar.save
+//newBar.save
 
-
-// Bar.find({},function(err,bar){
-
-// console.log("bar is ",bar);
-//     });
- Bar.find({},function(err,bar){
-  console.log("New bar stuff is ",bar);
-  var minWaitTime;
-  for(var i = 0; i < bar.length; i ++)
-  {
-    if (i === 0)
-    {
-      minWaitTime = bar[0].avg_wait_time;
-    }
-    else if(bar[0].avg_wait_time < minWaitTime)
-    {
-      minWaitTime = bar[i].avg_wait_time
-      indexThatWeWant = i;
-    }
-
-  }
-
-
-  bar.collection.avg_wait_time
-  });
-
-
-// Mongoose connection
-//var mongoose = require('mongoose');
-//mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
-//mongoose.connect('mongodb://'+process.env.WDI_MONGOLAB_USER+':'+process.env.WDI_MONGOLAB_PW+'@ds041394.mongolab.com:41394/drink_share');
-
-var mongoose = require('mongoose')
-mongoose.connect('mongodb://'+process.env.WDI_MONGOLAB_USER+':'+process.env.WDI_MONGOLAB_PW+'@ds041394.mongolab.com:41394/drink_share');
 
 app.use('/', routes);
 app.use('/users', users);
