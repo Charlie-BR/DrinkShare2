@@ -1,5 +1,9 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
+var findOrCreate = require('mongoose-findorcreate')
+var ClickSchema = new Schema({mongoose });
+ClickSchema.plugin(findOrCreate);
+var Click = mongoose.model('Click', ClickSchema);
 
 module.exports = mongoose.model('User', new Schema({
 	name: String,
@@ -18,7 +22,7 @@ module.exports = mongoose.model('Bar', new Schema({
 	type_sold: Array
 }));
 
-
+// module.exports = router;
 
 //Schema: creates document structure
 //var barSchema = mongoose.Schema ({

@@ -9,6 +9,7 @@ var users = require('./routes/users');
 var app = express();
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
+var User = require('./models/user')
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -21,6 +22,10 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+var findOrCreate = require('mongoose-findorcreate')
+var ClickSchema = new Schema({ });
+ClickSchema.plugin(findOrCreate);
+var Click = mongoose.model('Click', ClickSchema);
 
 var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
@@ -28,6 +33,15 @@ mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
 
 app.use('/', routes);
 app.use('/users', users);
+
+// Passport session setup.
+passport.serializeUser(function(user, done) {
+  done(null, user);
+});
+
+passport.deserializeUser(function(obj, done) {
+  done(null, obj);
+});
 
 passport.use(new FacebookStrategy({
     clientID: 190354277965892,
