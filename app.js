@@ -1,5 +1,9 @@
 var express = require('express');
 var path = require('path');
+var mongoose = require('mongoose');
+mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
+//mongoose.connect('mongodb://'+process.env.WDI_MONGOLAB_USER+':'+process.env.WDI_MONGOLAB_PW+'@ds041394.mongolab.com:41394/drink_share');
+
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
@@ -10,6 +14,12 @@ var app = express();
 var passport = require('passport');
 var FacebookStrategy = require('passport-facebook').Strategy;
 var User = require('./models/user')
+
+var Schema = mongoose.Schema;
+var findOrCreate = require('mongoose-findorcreate')
+var UserSchema = new mongoose.Schema({});
+UserSchema.plugin(findOrCreate);
+var User = mongoose.model('User', UserSchema);
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -22,14 +32,12 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-var findOrCreate = require('mongoose-findorcreate')
-var ClickSchema = new Schema({ });
-ClickSchema.plugin(findOrCreate);
-var Click = mongoose.model('Click', ClickSchema);
 
-var mongoose = require('mongoose');
-mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
-//mongoose.connect('mongodb://'+process.env.WDI_MONGOLAB_USER+':'+process.env.WDI_MONGOLAB_PW+'@ds041394.mongolab.com:41394/drink_share');
+// Passport initialize
+// app.configure(function() {
+app.use(passport.initialize());
+  app.use(passport.session());
+// });
 
 app.use('/', routes);
 app.use('/users', users);

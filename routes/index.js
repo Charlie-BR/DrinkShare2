@@ -14,10 +14,10 @@ router.get('/auth/facebook', passport.authenticate('facebook'));
 // access was granted, the user will be logged in.  Otherwise,
 // authentication has failed.
 router.get('/auth/facebook/callback',
-passport.authenticate('facebook', { successRedirect: '/',
-                                      failureRedirect: '/login' }));
+passport.authenticate('facebook', 
+	{ successRedirect: '/', failureRedirect: '/login' }));
 router.get('/auth/facebook',
-  passport.authenticate('facebook', { scope: ['user_status', 'user_checkins'] }));
+passport.authenticate('facebook', { scope: ['user_status', 'user_checkins'] }));
 /* GET main page. */
 // router.get('/users', function(req, res, next) {
 //   res.render('users');

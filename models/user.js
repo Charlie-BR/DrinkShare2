@@ -1,28 +1,30 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
-var findOrCreate = require('mongoose-findorcreate')
-var ClickSchema = new Schema({mongoose });
-ClickSchema.plugin(findOrCreate);
-var Click = mongoose.model('Click', ClickSchema);
+// var findOrCreate = require('mongoose-findorcreate')
+// var ClickSchema = new mongoose.Schema({});
+// // ClickSchema.plugin(findOrCreate);
+// var Click = mongoose.model('Click', ClickSchema);
+var express = require('express');
+var router = express.Router();
 
-module.exports = mongoose.model('User', new Schema({
-	name: String,
-	email: String,
-	bars_visited: Array,
-	drinks_ordered: Array,
-	comments: Array,
-	timestamps: Date
-}));
+// module.exports = mongoose.model('User', new Schema({
+// 	name: String,
+// 	email: String,
+// 	bars_visited: Array,
+// 	drinks_ordered: Array,
+// 	comments: Array,
+// 	timestamps: Date
+// }));
 
-module.exports = mongoose.model('Bar', new Schema({
-	name: String,
-	address: String,
-	avg_wait_time: Number,
-	users: Array,
-	type_sold: Array
-}));
+// module.exports = mongoose.model('Bar', new Schema({
+// 	name: String,
+// 	address: String,
+// 	avg_wait_time: Number,
+// 	users: Array,
+// 	type_sold: Array
+// }));
 
-// module.exports = router;
+module.exports = router;
 
 //Schema: creates document structure
 //var barSchema = mongoose.Schema ({
