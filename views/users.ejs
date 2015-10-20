@@ -7,17 +7,44 @@
   </head>
   
   <body>
-  	<div id='container'>
+  	<div class='container'>
 	  	<header>
-	  		Logo / Profile / Image?
+        Data Share | <a href="#">Profile</a>
+        <img id='logo' src="http://cdn.liquidplanner.com/wp-content/uploads/5701090.jpg">
 	  	</header>
 
-	  	<div id='search-bar'>
-	  		Search bar
+	  	<div id='search'>
+	  		<form>
+          <input class='search-bar' type='text' placeholder='Search Bar'>
+          <input class='search-bar' type='submit'>
+        </form>
 	  	</div>
 
 	  	<div id ='data-results'>
-        data
+        <table>
+          <tr>
+            <td>Bar Name</td>
+            <td>Avg. Wait Time</td>
+            <td>Address</td>
+          </tr>
+          <tr>
+            <td>Easy Tiger</td>
+            <td>5 minutes</td>
+            <td>709 E 6th St, Austin, TX 78701</td>
+          </tr>
+        </table>
+        <!-- <table>
+          <tr>
+            <//% Bars.each do |bar| %>
+            <td>
+              <//%= Bars.name %>
+            </td>
+            <td>
+              <//%= Bars.avg_wait_time %>
+            </td>
+            <//% end %>
+          </tr>
+        </table> -->
 	  	</div>
 
 	  	<div id='map'>
