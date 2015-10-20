@@ -18,6 +18,8 @@ module.exports = mongoose.model('Bar', new Schema({
 	type_sold: Array
 }));
 
+
+
 //Schema: creates document structure
 //var barSchema = mongoose.Schema ({
 // 	name: String,

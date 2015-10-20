@@ -4,11 +4,11 @@ var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
 var bodyParser = require('body-parser');
-
 var routes = require('./routes/index');
 var users = require('./routes/users');
-
 var app = express();
+var passport = require('passport');
+var FacebookStrategy = require('passport-facebook').Strategy;
 
 // view engine setup
 app.set('views', path.join(__dirname, 'views'));
@@ -28,6 +28,19 @@ mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
 
 app.use('/', routes);
 app.use('/users', users);
+
+passport.use(new FacebookStrategy({
+    clientID: 190354277965892,
+    clientSecret: '91ecfb6ab0e2f925f2294cdd25d3a24f',
+    callbackURL: "http://localhost:3000/"
+  },
+  function(accessToken, refreshToken, profile, done) {
+    User.findOrCreate(function(err, user) {
+      if (err) { return done(err); }
+      done(null, user);
+    });
+  }
+));
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {

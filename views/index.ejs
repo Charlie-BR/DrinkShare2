@@ -3,6 +3,7 @@
   <head>
     <title><%= title %></title>
     <meta charset="UTF-8">
+    <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.5/css/bootstrap.min.css" rel='stylesheet'>
     <link rel='stylesheet' href='/stylesheets/style.css' />
   </head>
   <body>		
@@ -22,9 +23,7 @@
 		  js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=190354277965892";
 		  fjs.parentNode.insertBefore(js, fjs);
 		}(document, 'script', 'facebook-jssdk'));
-	</script>
 
-	<script>
 	  // This is called with the results from from FB.getLoginStatus().
 	  function statusChangeCallback(response) {
 	    console.log('statusChangeCallback');
@@ -105,13 +104,20 @@
 	  }
 	</script>
 
+	<nav class="navbar navbar-default navbar-fixed-top">
+	  <div class="container">
+	    <img id="logo" src="images/logo.png">
+	    <div class="fb-login-button" data-max-rows="1" data-size="large" data-auto-logout-link="true"></div>
+	  </div>
+	</nav>
 	<!--
 	  Below we include the Login Button social plugin. This button uses
 	  the JavaScript SDK to present a graphical Login button that triggers
 	  the FB.login() function when clicked.
 	-->
 
-	<div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true"></div>
+	<a href="/auth/facebook">Login with Facebook</a>
+
 
   </body>
 </html>
