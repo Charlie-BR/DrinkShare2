@@ -32,16 +32,17 @@ app.use('/users', users);
 passport.use(new FacebookStrategy({
     clientID: 190354277965892,
     clientSecret: '91ecfb6ab0e2f925f2294cdd25d3a24f',
-    callbackURL: "http://localhost:3000/"
+    callbackURL: "http://localhost:3000/auth/facebook/callback"
   },
   function(accessToken, refreshToken, profile, done) {
     User.findOrCreate(function(err, user) {
-      console.log("User",User);
+      console.log("User", User);
       if (err) { return done(err); }
       done(null, user);
     });
   }
 ));
+
 
 // catch 404 and forward to error handler
 app.use(function(req, res, next) {
