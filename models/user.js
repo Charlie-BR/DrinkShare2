@@ -1,34 +1,21 @@
 var mongoose = require('mongoose');
 var Schema = mongoose.Schema;
 
-module.exports = mongoose.model('User', new Schema({
-	name: String,
-	email: String,
-	bars_visited: Array,
-	drinks_ordered: Array,
-	comments: Array,
-	timestamps: Date
-}));
-
-module.exports = mongoose.model('Bar', new Schema({
-	name: String,
-	address: String,
-	avg_wait_time: Number,
-	users: Array,
-	type_sold: Array
-}));
-
-//Schema: creates document structure
-//var barSchema = mongoose.Schema ({
+// module.exports = mongoose.model('User', new Schema({
 // 	name: String,
-// 	addresss: String,
-// })
+// 	email: String,
+// 	bars_visited: Array,
+// 	drinks_ordered: Array,
+// 	comments: Array,
+// 	timestamps: Date
+// }));
 
-//Model: creates the collection with document structure
-//var Bar = mongoose.model('Bar', barSchema);
+// module.exports = mongoose.model('Bar', new Schema({
+// 	name: String,
+// 	address: String,
+// 	avg_wait_time: Number,
+// 	users: Array,
+// 	type_sold: Array
+// }));
 
-//Document: creates a new document in the collection
-//var newBar = new Bar ({name: <value from form input, saved as variable>, address<value from form input, saved as variable>})
-
-//Save to database:
-//newBar.save
+// Schema: creates document structure

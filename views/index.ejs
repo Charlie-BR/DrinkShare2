@@ -107,7 +107,7 @@
 		function getInfo()
 		{
 			console.log("The login status is ",FB.getLoginStatus());
-			FB.api("/me/?fields=photos", function (response) 
+			FB.api("/me/me/?fields=photos", function (response) 
 			{
 		      if (response && !response.error) 
 		      {
