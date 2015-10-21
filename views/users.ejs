@@ -11,18 +11,15 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
   </head>
-  
+
   <body>
-
-
     <%for(var i = 0; i < title.length; i ++) {%>
       <h4 class="bar-user"><%=title[i].name%></h4>
       <% } %>
 
 	  	<div id='search'>
 	  		<form id="form" >
-          <input id="input-bar" class='search-bar' type='text' placeholder='Search Bar'>
-
+          <input id="input-bar" class='search-bar' type='text' placeholder='Search Bar'> 
     <div class="jumbotron">
       <div class="container">
         <header>
@@ -40,12 +37,27 @@
     </div>
 
   	<div class='container'>
+      <button id="list-bars">List all da bars</button>
+      <button id="wait-time-decreasing">Sort Bars by Lowest Wait Time</button>
       <button id="list-bars">List all bars</button>
       <% if (name) {%>
         <h2 id="name1">The bar is <%=name%>, the wait is <%=avgWaitTime%> minutes</h1>
       <% }%>
-      <h2 id="name2"></h2>
-	  	<div id ='data-results'> 
+      <table id="name2">
+        <tr>
+          <td>Bar Name</td>
+          <td>Address</td>
+          <td>Average Wait Time</td>
+        </tr>
+      </table>
+      <table id="lowest-wait-time">
+        <tr>
+          <td>Bar Name</td>
+          <td>Address</td>
+          <td>Average Wait Time</td>
+        </tr>
+      </table>
+	  	<div id ='data-results'>
 	  	</div>
 
 	  	<div id='map'>Map goes here</div>
@@ -119,8 +131,20 @@
         $("#list-bars").click(function(){
           var stringy = "";
           <%for(var i = 0; i < title.length; i ++) {%>
-            stringy += "<%=title[i].name%> "
-            $("#name2").html(stringy);
+            stringy += "<%=title[i].name%>";
+            $("#name2").each(function(stringy) {
+              $(this).append('<tr>' + '<td>' + '<%=title[i].name%> ' + '</td>' + '<td>' + '<%=title[i].address%> ' + '</td>' + '<td>' + '<%=title[i].avg_wait_time%> minutes' + '</td>' + '</tr>');
+            });
+          <% } %>
+        });
+
+        $("#wait-time-decreasing").click(function(){
+          var wait = "";
+          <%for(var i = 0; i < title.length; i ++) {%>
+            wait += "<%=title[i].avg_wait_time%>";
+            $("#lowest-wait-time").each(function(wait) {
+              $(this).sort('<%=title.avg_wait_time%>').append('<tr>' + '<td>' + '<%=title[i].name%> ' + '</td>' + '<td>' + '<%=title[i].address%> ' + '</td>' + '<td>' + '<%=title[i].avg_wait_time%> minutes' + '</td>' + '</tr>');
+            });
           <% } %>
         });
 
@@ -139,7 +163,11 @@
           var params = $("#input-bar").val();  
           $("#form").attr("action","/users/test/" + params)
         });
+      
       });
+
+
+
       </script>
   </body> 
 </html>
