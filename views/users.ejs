@@ -1,9 +1,10 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title><%= title %></title>
+    <title id="title"><%= title[0] %></title>
     <meta charset="UTF-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </head>
   
   <body>
@@ -20,6 +21,11 @@
         </form>
 	  	</div>
 
+      <button id="list-bars">List all da bars</button>
+
+      <h1 id="test"><%=title[0].users[0].name%></h1>
+      <h1 id="test2"><%=title[1].users[0].name%></h1>
+      <h1 id="test3"><%=title.length%></h1>
 	  	<div id ='data-results'>
         <table>
           <tr>
@@ -33,24 +39,19 @@
             <td>709 E 6th St, Austin, TX 78701</td>
           </tr>
         </table>
-        <!-- <table>
-          <tr>
-            <//% Bars.each do |bar| %>
-            <td>
-              <//%= Bars.name %>
-            </td>
-            <td>
-              <//%= Bars.avg_wait_time %>
-            </td>
-            <//% end %>
-          </tr>
-        </table> -->
+     
 	  	</div>
 
 	  	<div id='map'>
 	  		Map goes here
 	  	</div>
   	</div>
+      <script>
 
+      $(function() {
+        console.log("supppppp");
+        
+      });
+      </script>
   </body> 
 </html>
