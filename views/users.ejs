@@ -11,7 +11,15 @@
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
 
   </head>
-  <body>   
+
+  <body>
+    <%for(var i = 0; i < title.length; i ++) {%>
+      <h4 class="bar-user"><%=title[i].name%></h4>
+      <% } %>
+
+	  	<div id='search'>
+	  		<form id="form" >
+          <input id="input-bar" class='search-bar' type='text' placeholder='Search Bar'> 
     <div class="jumbotron">
       <div class="container">
         <header>
@@ -20,7 +28,8 @@
         </header>   
               <div id='search'>
         <form id="form"method="post" action="/users/test">
-          <input id="input-bar" class='search-bar' type='text' placeholder='Search for Nearby Bars'>
+          <input id="input-bar2" class='search-bar' type='text' placeholder='Search for Nearby Bars'>
+
           <input id="submit-bar" class='search-bar' type='submit'>
         </form>
       </div>   
@@ -28,11 +37,8 @@
     </div>
 
   	<div class='container'>
-
       <button id="list-bars">List all da bars</button>
       <button id="wait-time-decreasing">Sort Bars by Lowest Wait Time</button>
-
-
       <button id="list-bars">List all bars</button>
       <% if (name) {%>
         <h2 id="name1">The bar is <%=name%>, the wait is <%=avgWaitTime%> minutes</h1>
@@ -54,6 +60,14 @@
 	  	<div id ='data-results'>
 	  	</div>
 
+	  	<div id='map'>Map goes here</div>
+      <form id="parent-field" method="post" action="/users/createe">Supp add stuff here
+        <input type="text" id="add-bar" name="name" value="add new bar here">
+        
+        <input type="text" id="add-user" name="waitTime" value="add new wait time here">
+        <input type="submit"id="submit-create">
+      </form> 
+
 	  	<div id='map'>
 	  		Map goes here
 	  	</div>
@@ -67,7 +81,8 @@
             <div class="modal-header">
                       <%for(var i = 0; i < title.length; i ++) {%>
                    <input type="radio" ><%=title[i].name%></input>
-                      <% } %> 
+                      <% } %>
+              <form method="post" action="/users/createe">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
             <div>
@@ -80,16 +95,17 @@
             <div class="modal-body">
               <div class="btn-group btn-group-justified" role="group" aria-label="...">
                 <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default">Beer</button>
+                  <button id ="beer" value="beer" type="button" class="alcohol btn btn-default">Beer</button>
                 </div>
                 <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default">Wine</button>
+                  <button id="wine" value="wine" type="button" class="alcohol btn btn-default">Wine</button>
                 </div>
                 <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default">Well Liquor</button>
+                  <button type="button" value="liquor" class="alcohol btn btn-default">Well Liquor</button>
                 </div>
+                <input type="text" id="add-drink" name="drinkType" value="add new drink type here  ">
                 <div class="btn-group" role="group">
-                  <button type="button" class="btn btn-default">Fancy Cocktail</button>
+                  <button type="button" value="cocktail" class="alcohol btn btn-default">Fancy Cocktail</button>
                 </div>
               </div> 
               <div>
@@ -101,7 +117,8 @@
               </div>
             </div>
               <div>
-                <button type="submit" action="post" class="btn btn-default">Submit WaitTime</button>
+                <button type="submit" class="btn btn-default">Submit WaitTime</button>
+              </form>
               </div>           
             </div>
           </div><!-- /.modal-content -->
@@ -110,7 +127,7 @@
 
       <script>
       $(function() {
-
+        $("#add-drink").hide();
         $("#list-bars").click(function(){
           var stringy = "";
           <%for(var i = 0; i < title.length; i ++) {%>
@@ -131,8 +148,19 @@
           <% } %>
         });
 
+        $(".bar-user").click(function(){
+          console.log("heyyyyyyyyyyyyyyy");
+       });
+
+        $(".alcohol").click(function(){
+          $(".alcohol").css("color","blue");
+          $(this).css("color","red");
+          var SetInputValue = $(this).val();
+          $("#add-drink").val(SetInputValue);
+        });
+
         $("#submit-bar").click(function(){
-          var params = $("#input-bar").val();
+          var params = $("#input-bar").val();  
           $("#form").attr("action","/users/test/" + params)
         });
       });
