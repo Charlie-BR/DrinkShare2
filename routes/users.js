@@ -36,8 +36,9 @@ router.get('/', function(req, res, next) {
 
     passThisAlong = documents;
   }
+    res.render('users', { title: passThisAlong, name: "", avgWaitTime:""});
 });
-  res.render('users', { title: passThisAlong, name: "", avgWaitTime:""});
+
 });
 
 module.exports = router;

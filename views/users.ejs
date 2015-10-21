@@ -39,7 +39,7 @@
       <script>
 
       $(function() {
-        var newArray = "<%=title[1].name%>";
+        
         $("#list-bars").click(function(){
           var stringy = "";
           <%for(var i = 0; i < title.length; i ++) {%>
@@ -47,6 +47,8 @@
             $("#name2").html(stringy);
           <% } %>
         });
+
+ 
 
         $("#submit-bar").click(function(){
           var params = $("#input-bar").val();
