@@ -4,10 +4,11 @@
 
     <meta charset="UTF-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
+
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
 
   </head>
   
@@ -18,7 +19,9 @@
         Data Share | <a href="#">Profile</a>
         <img id='logo' src="http://cdn.liquidplanner.com/wp-content/uploads/5701090.jpg">
 	  	</header>
-
+      <%for(var i = 0; i < title.length; i ++) {%>
+            <h4><%=title[i].name%></h4>
+            <% } %>
 	  	<div id='search'>
 	  		<form id="form"method="post" action="/users/test">
           <input id="input-bar" class='search-bar' type='text' placeholder='Search Bar'>
@@ -78,6 +81,7 @@
 
       <script>
       $(function() {
+
         $("#list-bars").click(function(){
           var stringy = "";
           <%for(var i = 0; i < title.length; i ++) {%>
