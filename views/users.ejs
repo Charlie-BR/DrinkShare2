@@ -9,7 +9,7 @@
   
   <body>
     <%for(var i = 0; i < title.length; i ++) {%>
-      <h4><%=title[i].name%></h4>
+      <h4 class="bar-user"><%=title[i].name%></h4>
       <% } %>
   	<div class='container'>
 	  	<header>
@@ -32,14 +32,16 @@
 	  	<div id ='data-results'> 
 	  	</div>
 
-	  	<div id='map'>
-	  		Map goes here
-	  	</div>
-  	</div>
+	  	<div id='map'>Map goes here</div>
+      <form id="parent-field" method="post" action="/users/createe">Supp add stuff here
+        <input type="text" id="add-bar" name="name" value="add new bar here">
+        <input type="text" id="add-bar" name="drinkType" value="add new drink type here  ">
+        <input type="text" id="add-user" name="waitTime" value="add new wait time here">
+        <input type="submit"id="submit-create">
+      </form>
       <script>
 
-      $(function() {
-        
+      $(function() {   
         $("#list-bars").click(function(){
           var stringy = "";
           <%for(var i = 0; i < title.length; i ++) {%>
@@ -48,10 +50,12 @@
           <% } %>
         });
 
- 
+        $(".bar-user").click(function(){
+          console.log("heyyyyyyyyyyyyyyy");
+       });
 
         $("#submit-bar").click(function(){
-          var params = $("#input-bar").val();
+          var params = $("#input-bar").val();  
           $("#form").attr("action","/users/test/" + params)
         });
       });
