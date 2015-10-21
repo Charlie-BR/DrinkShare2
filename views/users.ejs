@@ -12,9 +12,7 @@
   </head>
   
   <body>
-    <%for(var i = 0; i < title.length; i ++) {%>
-      <h4><%=title[i].name%></h4>
-      <% } %>
+    
   	<div class='container'>
 	  	<header>
         Data Share | <a href="#">Profile</a>
@@ -35,7 +33,9 @@
       <h2 id="name2"></h2>
 	  	<div id ='data-results'> 
 	  	</div>
-
+        <%for(var i = 0; i < title.length; i ++) {%>
+          <h4><%=title[i].name%></h4>
+        <% } %> 
 	  	<div id='map'>
 	  		Map goes here
 	  	</div>
@@ -64,9 +64,13 @@
                 <div class="btn-group" role="group">
                   <button type="button" class="btn btn-default">Fancy Cocktail</button>
                 </div>
-                  
               </div> 
-              <input type="number" name="input" value="How Many Minutes did you Wait?">           
+              <div>
+                <input type="number" name="input" value="How Many Minutes did you Wait?">
+              </div>
+              <div>
+                <button type="submit" action="post" class="btn btn-default">Submit WaitTime</button>
+              </div>           
             </div>
           </div><!-- /.modal-content -->
         </div><!-- /.modal-dialog -->
