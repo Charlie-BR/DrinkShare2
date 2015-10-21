@@ -22,7 +22,26 @@ app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
+// Request API access: http://www.yelp.com/developers/getting_started/api_access
 
+var yelp = require("yelp").createClient({
+  consumer_key: "Q5B_DgFawdTD0bnT5vvgjg", 
+  consumer_secret: "qnAofE8977lcZmeE8qWKx9MKZus",
+  token: "XlNR_Sn9vSmPOzcxczMyeClhVYQtC5so",
+  token_secret: "fECg0XSbs6I8XyKcmgNkZjVq0tk"
+});
+
+// See http://www.yelp.com/developers/documentation/v2/search_api
+yelp.search({term: "food", location: "Montreal"}, function(error, data) {
+  console.log(error);
+  console.log(data);
+});
+
+// See http://www.yelp.com/developers/documentation/v2/business
+yelp.business("yelp-san-francisco", function(error, data) {
+  console.log(error);
+  console.log(data);
+});
 
 // var mongoose = require('mongoose');
 mongoose.connect(process.env.MONGO_DB_CONN_DRINK_SHARE);
