@@ -14,6 +14,7 @@
   
   <body>
 
+
     <%for(var i = 0; i < title.length; i ++) {%>
       <h4 class="bar-user"><%=title[i].name%></h4>
       <% } %>
@@ -29,11 +30,29 @@
 	  	<div id='search'>
 	  		<form id="form"method="post" action="/users/test">
           <input id="input-bar" class='search-bar' type='text' placeholder='Search Bar'>
+
+    <div class="jumbotron">
+      <div class="container">
+        <header>
+          Data Share | <a href="#">Profile</a>
+          <img id='logo' src="http://cdn.liquidplanner.com/wp-content/uploads/5701090.jpg">
+        </header>   
+              <div id='search'>
+        <form id="form"method="post" action="/users/test">
+          <input id="input-bar" class='search-bar' type='text' placeholder='Search for Nearby Bars'>
+
           <input id="submit-bar" class='search-bar' type='submit'>
         </form>
-	  	</div>
+      </div>   
+      </div>
+    </div>
 
-      <button id="list-bars">List all da bars</button>
+  	<div class='container'>
+
+     
+
+
+      <button id="list-bars">List all bars</button>
       <% if (name) {%>
         <h2 id="name1">The bar is <%=name%>, the wait is <%=avgWaitTime%> minutes</h1>
       <% }%>
@@ -41,10 +60,11 @@
 	  	<div id ='data-results'> 
 	  	</div>
 
+
 	  	<div id='map'>Map goes here</div>
       <form id="parent-field" method="post" action="/users/createe">Supp add stuff here
         <input type="text" id="add-bar" name="name" value="add new bar here">
-        <input type="text" id="add-bar" name="drinkType" value="add new drink type here  ">
+        <input type="text" id="add-drink" name="drinkType" value="add new drink type here  ">
         <input type="text" id="add-user" name="waitTime" value="add new wait time here">
         <input type="submit"id="submit-create">
       </form> 
@@ -60,7 +80,16 @@
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
+                      <%for(var i = 0; i < title.length; i ++) {%>
+                   <input type="radio" ><%=title[i].name%></input>
+                      <% } %> 
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+            </div>
+            <div>
+              <h4 class="modal-title">What Bar Are You At?</h4>
+              <input type="input" name="input" value="What bar are you at?">
+            </div>
+            <div>
               <h4 class="modal-title">How long did it take?</h4>
             </div>
             <div class="modal-body">
@@ -81,6 +110,11 @@
               <div>
                 <input type="number" name="input" value="How Many Minutes did you Wait?">
               </div>
+              <div class="progress">
+                <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
+                <span class="sr-only">40% Complete (success)</span>
+              </div>
+            </div>
               <div>
                 <button type="submit" action="post" class="btn btn-default">Submit WaitTime</button>
               </div>           
