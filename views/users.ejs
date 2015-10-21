@@ -1,13 +1,16 @@
 <!DOCTYPE html>
 <html>
   <head>
-    <title id="title"><%= title[0] %></title>
+
     <meta charset="UTF-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
   </head>
   
   <body>
+    <%for(var i = 0; i < title.length; i ++) {%>
+      <h4><%=title[i].name%></h4>
+      <% } %>
   	<div class='container'>
 	  	<header>
         Data Share | <a href="#">Profile</a>
@@ -15,31 +18,18 @@
 	  	</header>
 
 	  	<div id='search'>
-	  		<form>
-          <input class='search-bar' type='text' placeholder='Search Bar'>
-          <input class='search-bar' type='submit'>
+	  		<form id="form"method="post" action="/users/test">
+          <input id="input-bar" class='search-bar' type='text' placeholder='Search Bar'>
+          <input id="submit-bar" class='search-bar' type='submit'>
         </form>
 	  	</div>
 
       <button id="list-bars">List all da bars</button>
-
-      <h1 id="test"><%=title[0].users[0].name%></h1>
-      <h1 id="test2"><%=title[1].users[0].name%></h1>
-      <h1 id="test3"><%=title.length%></h1>
-	  	<div id ='data-results'>
-        <table>
-          <tr>
-            <td>Bar Name</td>
-            <td>Avg. Wait Time</td>
-            <td>Address</td>
-          </tr>
-          <tr>
-            <td>Easy Tiger</td>
-            <td>5 minutes</td>
-            <td>709 E 6th St, Austin, TX 78701</td>
-          </tr>
-        </table>
-     
+      <% if (name) {%>
+        <h2 id="name1">The bar is <%=name%>, the wait is <%=avgWaitTime%> minutes</h1>
+      <% }%>
+      <h2 id="name2"></h2>
+	  	<div id ='data-results'> 
 	  	</div>
 
 	  	<div id='map'>
@@ -49,8 +39,19 @@
       <script>
 
       $(function() {
-        console.log("supppppp");
-        
+        var newArray = "<%=title[1].name%>";
+        $("#list-bars").click(function(){
+          var stringy = "";
+          <%for(var i = 0; i < title.length; i ++) {%>
+            stringy += "<%=title[i].name%> "
+            $("#name2").html(stringy);
+          <% } %>
+        });
+
+        $("#submit-bar").click(function(){
+          var params = $("#input-bar").val();
+          $("#form").attr("action","/users/test/" + params)
+        });
       });
       </script>
   </body> 
