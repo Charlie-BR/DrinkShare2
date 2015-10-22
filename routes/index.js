@@ -1,8 +1,8 @@
 var express = require('express');
 var router = express.Router();
 
-//var routes = require('./routes/index');
-//var users = require('./models/users');
+var routes = require('./routes/index');
+var users = require('./models/users');
 
 
 /* GET main page. */
