@@ -72,4 +72,4 @@ app.use(function(err, req, res, next) {
 });
 
 
-module.exports = index;
+module.exports = app;
