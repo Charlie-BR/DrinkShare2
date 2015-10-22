@@ -26,4 +26,4 @@ router.get('/', function(req, res, next) {
 });
 
 
-module.exports = index;
+module.exports = app;
