@@ -12,9 +12,14 @@ router.get('/users', function(req, res, next) {
 
 var passThisAlong = {};
 router.post('/createe', function(req, res, next) {
-  var name = req.body.name;
   var waitTime = req.body.waitTime;
   var drinkType = req.body.drinkType;
+  var barName = req.body.barName;
+  var differentBar = req.body.differentBar;
+  var userName = req.body.userName;
+
+  // console.log("Bar name: ",barName, " Drink type: ",drinkType, " Wait time: ",waitTime, "Other bar is: ",differentBar);
+  console.log("The current logged in user is ",userName);
 
   var beerWaitTime = null;
   var cocktailWaitTime = null;
@@ -38,16 +43,21 @@ router.post('/createe', function(req, res, next) {
     cocktailWaitTime = waitTime;
   }
 
-  var newBar = Bar({
-      name: name,
-      comments: drinkType,
-      users: [{type_wait_time : {
+  var newBar = Bar
+  ({
+    name: barName,
+    comments: drinkType,
+    users: 
+    [{
+      type_wait_time : 
+      {
         beer : beerWaitTime,
         cocktail : cocktailWaitTime,
         wine : wineWaitTime,
         liquor : liquorWaitTime
-      }}]
-      //.users[0].type_wait_time.beer
+      },
+      name : userName
+    }]
   });
 
   newBar.save(function(err) {
@@ -62,9 +72,9 @@ router.post('/test/:searchedItem', function(req, res, next) {
       var searchedBar = documents[0];
       console.log("name: ",searchedBar.name,"average wait: ",searchedBar.avg_wait_time, " Other thing ",searchedBar.users[0].type_wait_time.beer)
       //  type_wait_time: { liquor: null, wine: null, cocktail: null, beer: 2 },
-    // avg_wait_time: 2,
+
     // address: '709 E 6th St, Austin, TX 78701',
-    // name:
+
        res.render('users',{title: passThisAlong, name:searchedBar.name, avgWaitTime: searchedBar.avg_wait_time});
     });
 });
