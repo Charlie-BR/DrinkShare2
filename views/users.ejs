@@ -11,28 +11,61 @@
   </head>
 
   <body>
-    <%for(var i = 0; i < title.length; i ++) {%>
-      <h4 class="bar-user"><%=title[i].name%></h4>
-      <% } %>
-
-	  	<div id='search'>
-	  		<form id="form" >
-          <input id="input-bar" class='search-bar' type='text' placeholder='Search Bar'> 
-    <div class="jumbotron">
-      <div class="container">
-        <header>
-          Data Share | <a href="#">Profile</a>
-          <img id='logo' src="http://cdn.liquidplanner.com/wp-content/uploads/5701090.jpg">
-        </header>   
-              <div id='search'>
-        <form id="form"method="post" action="/users/test">
-          <input id="input-bar2" class='search-bar' type='text' placeholder='Search for Nearby Bars'>
-
-          <input id="submit-bar" class='search-bar' type='submit'>
-        </form>
-      </div>   
-      </div>
+    <div id="fb-root"></div>
+    <div id="facebook-stuff">
+      <input id="set-status" type="text"> 
+      <button id="myFacebookLogin">Set your fb status with this message</button>
+      <button onclick="getInfo()">Get info</button>
+      <button onclick="lookUp()">Look up person by id</button>
     </div>
+
+
+    <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true"></div>
+      <%for(var i = 0; i < title.length; i ++) {%>
+        <h4 class="bar-user"><%=title[i].name%></h4>
+        <% } %>
+
+  	<div id='search'>
+  		<form id="form" >
+        <input id="input-bar" class='search-bar' type='text' placeholder='Search Bar'> 
+        <div class="jumbotron">
+          <div class="container">
+            <header>
+              Data Share | <a href="#">Profile</a>
+              <img id='logo' src="http://cdn.liquidplanner.com/wp-content/uploads/5701090.jpg">
+            </header>   
+            <div id='search'>
+              <form id="form"method="post" action="/users/test">
+                <input id="input-bar2" class='search-bar' type='text' placeholder='Search for Nearby Bars'>
+                <input id="submit-bar" class='search-bar' type='submit'>
+              </form>
+            </div>   
+          </div>
+      </div>
+
+  	   <div class='container'>
+        <button id="list-bars">List all da bars</button>
+        <button id="wait-time-decreasing">Sort Bars by Lowest Wait Time</button>
+        <% if (name) {%>
+          <h2 id="name1">The bar is <%=name%>, the wait is <%=avgWaitTime%> minutes</h1>
+        <% }%>
+        <table id="name2">
+          <tr>
+            <td>Bar Name</td>
+            <td>Address</td>
+            <td>Average Wait Time</td>
+          </tr>
+        </table>
+        <table id="lowest-wait-time">
+          <tr>
+            <td>Bar Name</td>
+            <td>Address</td>
+            <td>Average Wait Time</td>
+          </tr>
+        </table>
+  	  	<div id ='data-results'></div>
+	  	  <div id='map'>Map goes here</div>
+  	  </div>
 
   	<div class='container'>
       <button id="list-bars">List all da bars</button>
@@ -68,10 +101,29 @@
   	</div>
     <div class="btn btn-danger" href="#server_msg_modal" data-toggle="modal">Add New Wait Time</div>
 
+
+    <div id="popup" class="btn btn-danger" href="#server_msg_modal" data-toggle="modal">Add New Wait Time</div>
       <div class="modal fade" id="server_msg_modal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
+
+              <div class="row">
+                <div class="col-md-6">
+                  <radiogroup>
+                    <%for(var i = 0; i < title.length; i ++) {%>
+                      <input id="<%=title[i].name%>"type="radio" class="radio" name="radio"><%=title[i].name%></input>
+                    <% } %>
+                    </radiogroup>
+                  <form method="post" action="/users/createe">
+                  <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                </div>
+              <div class="col-md-6">
+                <h4 class="modal-title">At a different bar? Enter here</h4>
+                <input id="differentBar"type="input" name="differentBar" value="">
+              </div>
+              </div>  
+
               <%for(var i = 0; i < title.length; i ++) {%>
                 <input type="radio" name="radio"><%=title[i].name%></input>
               <% } %>
@@ -82,6 +134,7 @@
               <h4 class="modal-title">What Bar Are You At?</h4>
               <input type="input" name="input" value="What bar are you at?">
             </div>
+
             <div>
               <h4 class="modal-title">How long did it take?</h4>
             </div>
@@ -97,12 +150,14 @@
                   <button type="button" value="liquor" class="alcohol btn btn-default">Well Liquor</button>
                 </div>
                 <input type="text" id="add-drink" name="drinkType" value="add new drink type here  ">
+                 <input type="text" id="add-bar" name="barName" value="add the bar here">
+                   <input type="text" id="add-userName" name="userName" value="add userName">
                 <div class="btn-group" role="group">
                   <button type="button" value="cocktail" class="alcohol btn btn-default">Fancy Cocktail</button>
                 </div>
               </div> 
               <div>
-                <input type="number" name="input" value="How Many Minutes did you Wait?">
+                <input type="number" id="waitTime" name="waitTime" value="How Many Minutes did you Wait?">
               </div>
               <div class="progress">
                 <div class="progress-bar progress-bar-success" role="progressbar" aria-valuenow="40" aria-valuemin="0" aria-valuemax="100" style="width: 80%">
@@ -110,7 +165,7 @@
               </div>
             </div>
               <div>
-                <button type="submit" class="btn btn-default">Submit WaitTime</button>
+                <button id="submitter" type="submit" class="btn btn-default">Submit WaitTime</button>
               </form>
               </div>           
             </div>
@@ -119,10 +174,103 @@
       </div><!-- /.modal -->
 
       <script>
-      $(function() {
+        $(function() {
+          (function(d, s, id) {
+          var js, fjs = d.getElementsByTagName(s)[0];
+          if (d.getElementById(id)) return;
+          js = d.createElement(s); js.id = id;
+          js.src = "//connect.facebook.net/en_US/sdk.js#xfbml=1&version=v2.5&appId=190354277965892";
+          fjs.parentNode.insertBefore(js, fjs);
+        }(document, 'script', 'facebook-jssdk'));
+        function statusChangeCallback(response) {
+          console.log('statusChangeCallback');
+          console.log(response);
+          if (response.status === 'connected') {
+            testAPI();
+          } else if (response.status === 'not_authorized') {
+            document.getElementById('status').innerHTML = 'Please log ' +
+              'into this app.';
+          } else {
+            document.getElementById('status').innerHTML = 'Please log ' +
+              'into Facebook.';
+          }
+        }
+        function checkLoginState() {
+          FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+          });
+        }
+        window.fbAsyncInit = function() {
+        FB.init({
+          appId      : '190354277965892',
+          cookie     : true,  // enable cookies to allow the server to access 
+                              // the session
+          xfbml      : true,  // parse social plugins on this page
+          version    : 'v2.2' // use version 2.2
+        });
+
+          FB.getLoginStatus(function(response) {
+            statusChangeCallback(response);
+          });
+        };
+
+        function testAPI() 
+        {
+          FB.api('/me', function(response) {
+            var name = response.name;
+            console.log('Successful login for: ' + name);
+          });
+        }
+        function setFacebookUser(cb)
+        {
+          FB.api('/me', function(response) {
+            var name = response.name;
+            cb(name);
+          });
+        }
+
+        function myFacebookLogin() 
+        {
+          var message = $("#set-status").val();
+          console.log("Message is ",message);
+            FB.login(function()
+            {
+              FB.api('/me/feed', 'post', {message: message});
+
+          }, {scope: 'publish_actions, user_likes, user_photos'});
+        }
+        function getInfo()
+        {
+          console.log("The login status is ",FB.getLoginStatus());
+          FB.api("/me/me/?fields=photos", function (response) 
+          {
+              if (response && !response.error) 
+              {
+                console.log("The response is ",response)
+              }
+            });
+
+          FB.Canvas.getPageInfo(
+            function(info) 
+            {
+                alert('Width: ' + info.clientWidth + ' Height: ' + info.clientHeight);
+              }); 
+          }
+    
+      function lookUp()
+      {
+        var message = '/' + $("#set-status").val();
+        FB.api(message, function(response) {
+          // console.log(response);
+        });
+      }
         $("#add-drink").hide();
+        $("#add-bar").hide();
+        $("#add-userName").hide();
+        $("#facebook-stuff").hide()
         $("#list-bars").click(function(){
           var stringy = "";
+
           <%for(var i = 0; i < title.length; i ++) {%>
             stringy += "<%=title[i].name%>";
             $("#name2").each(function(stringy) {
@@ -146,14 +294,41 @@
           $(this).css("color","red");
           var SetInputValue = $(this).val();
           $("#add-drink").val(SetInputValue);
+          console.log("The person logged in is",facebookName);
         });
 
         $("#submit-bar").click(function(){
           var params = $("#input-bar").val();  
           $("#form").attr("action","/users/test/" + params)
         });
+
+
+        $(".radio").click(function(){
+          $("#add-bar").val(($(this)[0].id));
+        });
+
+        $("#myFacebookLogin").click(function(){
+          myFacebookLogin();
+        });
+        var facebookName;
+        $("#popup").click(function(){
+          setFacebookUser(function(name){
+            facebookName = name;
+            $("#add-userName").val(facebookName);
+          });
+        });
+        $("#submitter").click(function(){
+          var differentBar = $("#differentBar").val();
+          if (differentBar)
+          {
+            $("#add-bar").val(differentBar);  
+          }
+         
+        });      
       });
 
+
+      });
       </script>
 
   </body> 
