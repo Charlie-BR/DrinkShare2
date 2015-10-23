@@ -45,7 +45,6 @@
   	   <div class='container'>
         <button id="list-bars">List all da bars</button>
         <button id="wait-time-decreasing">Sort Bars by Lowest Wait Time</button>
-        <button id="list-bars">List all bars</button>
         <% if (name) {%>
           <h2 id="name1">The bar is <%=name%>, the wait is <%=avgWaitTime%> minutes</h1>
         <% }%>
@@ -222,6 +221,7 @@
         $("#facebook-stuff").hide()
         $("#list-bars").click(function(){
           var stringy = "";
+
           <%for(var i = 0; i < title.length; i ++) {%>
             stringy += "<%=title[i].name%>";
             $("#name2").each(function(stringy) {

@@ -95,7 +95,7 @@ router.get('/average', function(req, res, next) {
      });
       individualBar.avg_wait_time = totalDrinkTime / totalNumberDrinks;
         var average = totalDrinkTime / totalNumberDrinks;
-        Bar.findOneAndUpdate({name: individualBar.name }, {avg_wait_time: average}, function(err, bar){
+        Bar.findOneAndUpdate({name: individualBar.name }, {avg_wait_time:  f}, function(err, bar){
           if (err) console.log(err);
           console.log(average, "average", individualBar.name);
         });
