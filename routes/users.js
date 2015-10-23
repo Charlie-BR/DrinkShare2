@@ -2,7 +2,7 @@ var express = require('express');
 var router = express.Router();
 
 // Require the User model
-var Bar = require('../models/user');
+var Bar = require('../models/User');
 // var Bar = require('./models/user')
 
 /* GET users listing. */
