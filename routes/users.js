@@ -12,7 +12,7 @@ router.get('/users', function(req, res, next) {
 
 var passThisAlong = {};
 router.post('/createe', function(req, res, next) {
-<<<<<<< HEAD
+
   var waitTime = req.body.waitTime;
   var drinkType = req.body.drinkType;
   var barName = req.body.barName;
@@ -20,12 +20,12 @@ router.post('/createe', function(req, res, next) {
   var userName = req.body.userName;
 
   console.log("The current logged in user is ",userName);
-=======
+
   var barName = req.body.name;
   var waitTime = req.body.waitTime;
   var drinkType = req.body.drinkType;
   console.log("barname is ",barName, "waitTime is ", waitTime, "drinkType is ", drinkType)
->>>>>>> master
+
 
   var beerWaitTime = null;
   var cocktailWaitTime = null;
@@ -49,7 +49,7 @@ router.post('/createe', function(req, res, next) {
     cocktailWaitTime = waitTime;
   }
 
-<<<<<<< HEAD
+
   var newBar = Bar
   ({
     name: barName,
@@ -58,12 +58,12 @@ router.post('/createe', function(req, res, next) {
     [{
       type_wait_time : 
       {
-=======
+
   var newBar = Bar({
       name: barName,
       comments: drinkType,
       users: [{type_wait_time : {
->>>>>>> master
+
         beer : beerWaitTime,
         cocktail : cocktailWaitTime,
         wine : wineWaitTime,
