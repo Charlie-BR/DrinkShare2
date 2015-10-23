@@ -82,4 +82,47 @@ router.get('/', function(req, res, next) {
   });
 });
 
+router.get('/average', function(req, res, next) {
+  //res.send('respond with a resource');
+  console.log("justin");
+  var barNames = [];
+  var userNamesArray = [];
+  var userObjectArray = [];
+  var avgDrinkTime = 0;
+  Bar.find({}, function(err, barArray) {
+    if(err) {
+      console.log("The error is ",err);
+      throw err;
+    } else {
+
+      passThisAlong = barArray;
+    }
+    barArray.forEach(function(individualBar, index){
+      var totalDrinkTime = 0;
+      var totalNumberDrinks = 0;
+      individualBar.users.forEach(function(individualUser, userIndex){
+      userNamesArray.push(individualUser.name);
+      userObjectArray.push(individualUser);
+      for (drinkType in individualUser.type_wait_time)
+      {
+        if (individualUser.type_wait_time[drinkType]){
+          totalDrinkTime += individualUser.type_wait_time[drinkType];
+          totalNumberDrinks++;
+          }
+        }
+     });
+      individualBar.avg_wait_time = totalDrinkTime / totalNumberDrinks;
+        var average = totalDrinkTime / totalNumberDrinks;
+        Bar.findOneAndUpdate({name: individualBar.name }, {avg_wait_time: average}, function(err, bar){
+          if (err) console.log(err);
+          console.log(bar);
+          console.log(average, "average", individualBar.name);
+        });
+    });
+    // console.log(totalNumberDrinks, "totalNumberDrinks");
+    // console.log(totalDrinkTime, "totalDrinkTime");
+    res.render('test', {userNames: userNamesArray})
+  });
+});
+
 module.exports = router;
