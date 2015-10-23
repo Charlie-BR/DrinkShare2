@@ -1,7 +1,6 @@
 <!DOCTYPE html>
 <html>
   <head>
-
     <meta charset="UTF-8">
     <link rel='stylesheet' href='/stylesheets/style.css' />
     <script src="https://ajax.googleapis.com/ajax/libs/jquery/1.11.3/jquery.min.js"></script>
@@ -9,7 +8,6 @@
     <link href="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/css/bootstrap.min.css" rel="stylesheet" />
     <script src="//code.jquery.com/jquery-1.11.0.min.js"></script>
     <script src="//maxcdn.bootstrapcdn.com/bootstrap/3.3.2/js/bootstrap.min.js"></script>
-
   </head>
 
   <body>
@@ -57,31 +55,26 @@
           <td>Average Wait Time</td>
         </tr>
       </table>
-	  	<div id ='data-results'>
-	  	</div>
-
+	  	<div id ='data-results'></div>
 	  	<div id='map'>Map goes here</div>
       <form id="parent-field" method="post" action="/users/createe">Supp add stuff here
         <input type="text" id="add-bar" name="name" value="add new bar here">
-        
         <input type="text" id="add-user" name="waitTime" value="add new wait time here">
         <input type="submit"id="submit-create">
       </form> 
-
 	  	<div id='map'>
 	  		Map goes here
 	  	</div>
   	</div>
-
     <div class="btn btn-danger" href="#server_msg_modal" data-toggle="modal">Add New Wait Time</div>
 
       <div class="modal fade" id="server_msg_modal">
         <div class="modal-dialog">
           <div class="modal-content">
             <div class="modal-header">
-                      <%for(var i = 0; i < title.length; i ++) {%>
-                   <input type="radio" ><%=title[i].name%></input>
-                      <% } %>
+              <%for(var i = 0; i < title.length; i ++) {%>
+                <input type="radio" name="radio"><%=title[i].name%></input>
+              <% } %>
               <form method="post" action="/users/createe">
               <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
             </div>
