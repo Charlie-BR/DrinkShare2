@@ -12,9 +12,10 @@ router.get('/users', function(req, res, next) {
 
 var passThisAlong = {};
 router.post('/createe', function(req, res, next) {
-  var name = req.body.name;
+  var barName = req.body.name;
   var waitTime = req.body.waitTime;
   var drinkType = req.body.drinkType;
+  console.log("barname is ",barName, "waitTime is ", waitTime, "drinkType is ", drinkType)
 
   var beerWaitTime = null;
   var cocktailWaitTime = null;
@@ -39,7 +40,7 @@ router.post('/createe', function(req, res, next) {
   }
 
   var newBar = Bar({
-      name: name,
+      name: barName,
       comments: drinkType,
       users: [{type_wait_time : {
         beer : beerWaitTime,
