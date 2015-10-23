@@ -18,7 +18,6 @@ router.post('/createe', function(req, res, next) {
   var differentBar = req.body.differentBar;
   var userName = req.body.userName;
 
-  // console.log("Bar name: ",barName, " Drink type: ",drinkType, " Wait time: ",waitTime, "Other bar is: ",differentBar);
   console.log("The current logged in user is ",userName);
 
   var beerWaitTime = null;
@@ -64,22 +63,56 @@ router.post('/createe', function(req, res, next) {
       if (err) console.log(err);
   });
   res.redirect('/users')
+});
+router.get('/average', function(req, res, next) {
+  //res.send('respond with a resource');
+  console.log("justin");
+  var barNames = [];
+  var userNamesArray = [];
+  var userObjectArray = [];
+  var avgDrinkTime = 0;
+  Bar.find({}, function(err, barArray) {
+    if(err) {
+      console.log("The error is ",err);
+      throw err;
+    } else {
+
+      passThisAlong = barArray;
+    }
+    barArray.forEach(function(individualBar, index){
+      var totalDrinkTime = 0;
+      var totalNumberDrinks = 0;
+      individualBar.users.forEach(function(individualUser, userIndex){
+      userNamesArray.push(individualUser.name);
+      userObjectArray.push(individualUser);
+      for (drinkType in individualUser.type_wait_time)
+      {
+        if (individualUser.type_wait_time[drinkType]){
+          totalDrinkTime += individualUser.type_wait_time[drinkType];
+          totalNumberDrinks++;
+          }
+        }
+     });
+      individualBar.avg_wait_time = totalDrinkTime / totalNumberDrinks;
+        var average = totalDrinkTime / totalNumberDrinks;
+        Bar.findOneAndUpdate({name: individualBar.name }, {avg_wait_time: average}, function(err, bar){
+          if (err) console.log(err);
+          console.log(average, "average", individualBar.name);
+        });
+    });
+    res.render('test', {userNames: userNamesArray})
+  });
 }); 
 router.post('/test/:searchedItem', function(req, res, next) {
     var barQuery = req.params.searchedItem;
     Bar.find({ name: barQuery},  function(err, documents) {
       if (err) console.log(err);
       var searchedBar = documents[0];
-      console.log("name: ",searchedBar.name,"average wait: ",searchedBar.avg_wait_time, " Other thing ",searchedBar.users[0].type_wait_time.beer)
-      //  type_wait_time: { liquor: null, wine: null, cocktail: null, beer: 2 },
-
-    // address: '709 E 6th St, Austin, TX 78701',
-
        res.render('users',{title: passThisAlong, name:searchedBar.name, avgWaitTime: searchedBar.avg_wait_time});
     });
 });
 router.get('/', function(req, res, next) {
-  //res.send('respond with a resource');
+
   Bar.find({}, function(err, documents) {
     if(err) {
       console.log("The error is ",err);

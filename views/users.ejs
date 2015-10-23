@@ -12,10 +12,12 @@
 
   <body>
     <div id="fb-root"></div>
-    <input id="set-status" type="text"> 
-    <button id="myFacebookLogin">Set your fb status with this message</button>
-    <button onclick="getInfo()">Get info</button>
-    <button onclick="lookUp()">Look up person by id</button>
+    <div id="facebook-stuff">
+      <input id="set-status" type="text"> 
+      <button id="myFacebookLogin">Set your fb status with this message</button>
+      <button onclick="getInfo()">Get info</button>
+      <button onclick="lookUp()">Look up person by id</button>
+    </div>
 
     <div class="fb-login-button" data-max-rows="1" data-size="large" data-show-faces="true" data-auto-logout-link="true"></div>
       <%for(var i = 0; i < title.length; i ++) {%>
@@ -217,6 +219,7 @@
         $("#add-drink").hide();
         $("#add-bar").hide();
         $("#add-userName").hide();
+        $("#facebook-stuff").hide()
         $("#list-bars").click(function(){
           var stringy = "";
           <%for(var i = 0; i < title.length; i ++) {%>
@@ -266,7 +269,11 @@
         });
         $("#submitter").click(function(){
           var differentBar = $("#differentBar").val();
-          $("#add-bar").val(differentBar);
+          if (differentBar)
+          {
+            $("#add-bar").val(differentBar);  
+          }
+         
         });      
       });
 
