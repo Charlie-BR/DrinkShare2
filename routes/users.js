@@ -18,7 +18,7 @@ router.post('/createe', function(req, res, next) {
   var differentBar = req.body.differentBar;
   var userName = req.body.userName;
 
-  console.log("The current logged in user is ",userName);
+  console.log("The differentBar is  ",differentBar, "barname is ", barName);
 
   var beerWaitTime = null;
   var cocktailWaitTime = null;
