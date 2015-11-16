@@ -190,6 +190,9 @@
 
           }, {scope: 'publish_actions, user_likes, user_photos'});
         }
+
+
+        
         function getInfo()
         {
           console.log("The login status is ",FB.getLoginStatus());
@@ -249,7 +252,8 @@
         });
 
         $("#submit-bar").click(function(){
-          var params = $("#input-bar").val();  
+          // var params = $("#input-bar").val();  
+        var params = userName;
           $("#form").attr("action","/users/test/" + params)
         });
 
